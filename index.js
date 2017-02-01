@@ -45,6 +45,7 @@ io.sockets.on('connect', (socket)=>{
 		console.log("someone sent a message. it is: ", messageObject.message);
 		io.sockets.emit('messageToClient',{
 			message: messageObject.message,
+			name: messageObject.name,
 			date: new Date()
 		})
 

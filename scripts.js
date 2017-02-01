@@ -14,14 +14,15 @@ socketio.on('users', (socketUsers)=>{
 })
 
 socketio.on('messageToClient', (messageObject)=>{
-	document.getElementById('userChats').innerHTML += '<div class="message">' + messageObject.message + ' -- ' + messageObject.date + '</div>';
+	document.getElementById('userChats').innerHTML += '<div class="message">' +messageObject.name+': '+ messageObject.message + ' -- ' + messageObject.date + '</div>';
 	updateScroll();
 })
 
 
 // CLIENT FUNCTIONS
+var username;
 function getUserName(){
-	var username = window.prompt("Enter your username", "Anonymous");
+	username = window.prompt("Enter your username", "Anonymous");
 	socketio.emit('userNameToServer', {
 		name: username
 	})
@@ -37,7 +38,7 @@ function sendChatMessage(){
 	var messageToSend = document.getElementById('chat-message').value;
 	socketio.emit('messageToServer', {
 		message: messageToSend,
-		name: "Anonymous"
+		name: username
 	})
 	document.getElementById('chat-message').value = "";
 }
