@@ -15,10 +15,22 @@ socketio.on('users', (socketUsers)=>{
 
 socketio.on('messageToClient', (messageObject)=>{
 	document.getElementById('userChats').innerHTML += '<div class="message">' + messageObject.message + ' -- ' + messageObject.date + '</div>';
+	updateScroll();
 })
 
 
 // CLIENT FUNCTIONS
+function getUserName(){
+	var username = window.prompt("Enter your username", "Anonymous");
+	socketio.emit('userNameToServer', {
+		name: username
+	})
+}
+
+function updateScroll(){
+	var element = document.getElementById('userChats');
+	element.scrollTop = element.scrollHeight;
+}
 
 function sendChatMessage(){
 	event.preventDefault();
@@ -49,7 +61,7 @@ colorPick.addEventListener('change', (event)=>{
 
 thicknessPicker.addEventListener('change', (event)=>{
 	thickness = thicknessPicker.value;
-})
+});
 
 
 canvas.addEventListener('mousedown', (event)=>{

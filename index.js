@@ -29,19 +29,25 @@ var socketUsers = [];
 
 // handle socket connections..
 io.sockets.on('connect', (socket)=>{
-	console.log('somoene connected by socket');
-	socketUsers.push({
-		socketID: socket.id,
-		name: "Anonymous"
-	})
-	io.sockets.emit('users', socketUsers);
+	
+	console.log('someone connected by socket');
+
+	socket.on('userNameToServer', (nameObject)=>{
+		socketUsers.push({
+			socketID: socket.id,
+			name: nameObject.name
+
+		})	
+		io.sockets.emit('users', socketUsers);
+	});
 
 	socket.on('messageToServer', (messageObject)=>{
-		console.log("someone sent a message. it is ", messageObject.message);
+		console.log("someone sent a message. it is: ", messageObject.message);
 		io.sockets.emit('messageToClient',{
 			message: messageObject.message,
 			date: new Date()
 		})
+
 	});
 	socket.on('drawingToServer', (drawingData)=>{
 		if(drawingData.lastMousePosition !== null){
