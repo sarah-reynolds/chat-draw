@@ -14,7 +14,7 @@ socketio.on('users', (socketUsers)=>{
 })
 
 socketio.on('messageToClient', (messageObject)=>{
-	document.getElementById('userChats').innerHTML += '<div class="message">' +messageObject.name+': '+ messageObject.message + ' -- ' + messageObject.date + '</div>';
+	document.getElementById('userChats').innerHTML += '<div class="message"><strong>' +messageObject.name+': </strong>'+ messageObject.message + ' -- ' + messageObject.date + '</div>';
 	updateScroll();
 })
 
