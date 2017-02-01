@@ -13,14 +13,44 @@ canvas{
 	overflow-y: scroll;
 }
 
-#chat-message{
-	width: 200px;
+#curr-username-chat{
+	font-family: 'Times New Roman', serif;
+	color: red;
+	font-size: 16px;
 }
+
+#last-username-chat{
+	font-family: 'Times New Roman', serif;
+	color: blue;
+	font-size: 16px;
+}
+
+#chat-message{
+	width: 255px;
+	height: 38px;
+	line-height: 38px;
+}
+
+#aslicon{
+	height: 40px;
+	margin: 0 2px 4px 0;
+}
+
+#chat-form{
+	height: auto;
+	width: 300px;
+	line-height: 38px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
 #page-header{
 	background-color: blue;
 	color: white;
 	border: 1px solid black;
-	width: 90px;
+	width: 110px;
 	text-align: center;
 }
 

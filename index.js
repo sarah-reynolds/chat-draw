@@ -46,7 +46,7 @@ io.sockets.on('connect', (socket)=>{
 		io.sockets.emit('messageToClient',{
 			message: messageObject.message,
 			name: messageObject.name,
-			date: new Date()
+			date: new Date().toLocaleTimeString()
 		})
 
 	});

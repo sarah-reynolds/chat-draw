@@ -3,26 +3,37 @@
 
 // console.log(io);
 var socketio = io.connect('http://127.0.0.1:8080');
-
+var currentUserSocketId;
+var lastSocketUserId;
 socketio.on('users', (socketUsers)=>{
 	console.log(socketUsers);
+	currentUserSocketId = socketUsers[0].socketID;
 	var newHTML = "";
 	socketUsers.map((currSocket, index)=>{
+		lastSocketUserId = currSocket.socketID;
 		newHTML += '<li class="user">'+currSocket.name+'</li>';
 	})
 	document.getElementById('userNames').innerHTML = newHTML;
+	console.log('currentUserSocketId')
+	console.log(currentUserSocketId)
+	console.log('lastSocketUserId')
+	console.log(lastSocketUserId)
+
 })
 
 socketio.on('messageToClient', (messageObject)=>{
-	document.getElementById('userChats').innerHTML += '<div class="message"><strong>' +messageObject.name+': </strong>'+ messageObject.message + ' -- ' + messageObject.date + '</div>';
+	document.getElementById('userChats').innerHTML += '<div class="message"><strong id="curr-username-chat">' +messageObject.name+': </strong>'+ messageObject.message + ' (' + messageObject.date + ')</div>';
 	updateScroll();
 })
 
 
 // CLIENT FUNCTIONS
 var username;
+
 function getUserName(){
-	username = window.prompt("Enter your username", "Anonymous");
+	username = window.prompt("Enter your username");
+	// currentUserSocketId = socketio.Socket.id
+	console.log(socketio.id)
 	socketio.emit('userNameToServer', {
 		name: username
 	})
