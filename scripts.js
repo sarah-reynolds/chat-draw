@@ -28,7 +28,7 @@ socketio.on('messageToClient', (messageObject)=>{
 	}else{
 	document.getElementById('userChats').innerHTML += '<div class="message"><strong id="last-username-chat">' +messageObject.name+': </strong>'+ messageObject.message + ' (' + messageObject.date + ')</div>';
 	}
-	if(msgString.includes("banana")){
+	if(msgString.includes("banana") || msgString.includes("peanut butter")){
 		bananaEasterEgg();
 	}
 	updateScroll();
