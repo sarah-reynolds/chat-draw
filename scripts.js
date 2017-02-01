@@ -22,13 +22,25 @@ socketio.on('users', (socketUsers)=>{
 })
 
 socketio.on('messageToClient', (messageObject)=>{
+	var msgString = messageObject.message;
+	if(currentUserSocketId == lastSocketUserId){
 	document.getElementById('userChats').innerHTML += '<div class="message"><strong id="curr-username-chat">' +messageObject.name+': </strong>'+ messageObject.message + ' (' + messageObject.date + ')</div>';
+	}else{
+	document.getElementById('userChats').innerHTML += '<div class="message"><strong id="last-username-chat">' +messageObject.name+': </strong>'+ messageObject.message + ' (' + messageObject.date + ')</div>';
+	}
+	if(msgString.includes("banana")){
+		bananaEasterEgg();
+	}
 	updateScroll();
 })
 
 
 // CLIENT FUNCTIONS
 var username;
+
+function bananaEasterEgg(){
+	document.getElementById('easter-egg').innerHTML = '<img src="http://i2.kym-cdn.com/entries/icons/original/000/000/188/DancingBannana.gif" width="100px" />'
+}
 
 function getUserName(){
 	username = window.prompt("Enter your username");
