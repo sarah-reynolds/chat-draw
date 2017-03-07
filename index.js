@@ -20,14 +20,14 @@ var server = http.createServer((req, res)=>{
 	// })
 });
 
-// include the server version of socketio and assign it to a variabel
+// include the server version of socketio and assign it to a variable
 var socketIo = require('socket.io');
-// sockets are going to listen to the server which is litening on port 8080
+// sockets are going to listen to the server which is listening on port 8080
 var io = socketIo.listen(server);
 
 var socketUsers = [];
 
-// handle socket connections..
+// handle socket connections...
 io.sockets.on('connect', (socket)=>{
 	
 	console.log('someone connected by socket');

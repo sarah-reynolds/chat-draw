@@ -22,15 +22,19 @@ socketio.on('users', (socketUsers)=>{
 })
 
 socketio.on('messageToClient', (messageObject)=>{
+	// listening for new 
 	var msgString = messageObject.message;
 	if(currentUserSocketId == lastSocketUserId){
+		// sockets is listening for any 
 	document.getElementById('userChats').innerHTML += '<div class="message"><strong id="curr-username-chat">' +messageObject.name+': </strong>'+ messageObject.message + ' (' + messageObject.date + ')</div>';
 	}else{
 	document.getElementById('userChats').innerHTML += '<div class="message"><strong id="last-username-chat">' +messageObject.name+': </strong>'+ messageObject.message + ' (' + messageObject.date + ')</div>';
 	}
+	// easter egg! if anyone says banana or peanut butter, run the function that makes the pbjtime banana gif appear
 	if(msgString.includes("banana") || msgString.includes("peanut butter")){
 		bananaEasterEgg();
 	}
+	// run the update scroll function whenever messages are sent
 	updateScroll();
 })
 
@@ -52,6 +56,7 @@ function getUserName(){
 }
 
 function updateScroll(){
+	// pushes content of chat up so the user always sees the lates messages
 	var element = document.getElementById('userChats');
 	element.scrollTop = element.scrollHeight;
 }
